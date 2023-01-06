@@ -1,0 +1,437 @@
+// 6. class - 속성fields + (행동methods)
+// 속성만 있을 수도 있다-> 데이터 클래스라 함
+
+//클래스 어찌고들이 일어나는게 객체지향 언어
+
+// class -template, declare once, no data in
+// object -instance of a class, created many times,data in
+
+'use strict';
+
+// object-oriented programming
+// class: template
+// object: instance of a class
+
+// js classes 
+// - introduced in ES6, 도입 얼마 안됨
+// - 도입 전엔 클래스 정의 안하고 객체 만듬
+// - syntactical sugar over prototype-based interitance
+
+// 1. class declarations
+class person {
+  // constructor 생성자로 필요한 데이터 전달
+  constructor(name, age) {
+    //fields 컨스트럭터에 전달된 데이터를 필즈에 할당
+    this.name = name;
+    this.age = age;
+  }
+
+  // methods
+  speak() {
+    console.log(`${this.name}: hello!`);
+  }
+}
+
+const ellie = new person('ellie', 20);
+console.log(ellie.name);
+console.log(ellie.age);
+ellie.speak();
+
+
+
+// 2. getter and setters
+// 뭐 커피 주문시 처음 수량이 -1잔이라고 설정하믄 말 안되는데 그걸 0으로 돌려준대
+class user {
+  constructor(firstName, lastName, age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+  get age() {
+    return this._age;
+  }
+
+  set age(value) { // 괄호 안 두가지 방법으로 조정 가능. 에러 띄우거나 0으로 보여주거나
+    // if (value < 0) {
+    //   throw error('age can not be negative');
+    //}  
+    this._age = value < 0 ? 0 : value;
+  }
+}
+
+const user1 = new user('steve', 'jobs', -1);
+console.log(user1.age);
+
+
+
+// 3.fields (public, private)
+// too soon! 겁나 최근에 추가되어서 많이 쓰지는 않아(2년전이라 이젠 최근도 아니군..)
+class Experiment {
+  publicField = 2;
+  #privateField = 0;
+}
+const experiment = new Experiment();
+console.log(experiment.publicField);
+console.log(experiment.privateField);
+// 지금 쓰기엔 이르고 쓰려면 바벨을 써야한다...먼말
+
+
+
+// 4. static properties and methods -> 다시 혹은 다른 곳에서 찾아봐라
+class Article {
+  static publisher = 'Dream Coding';
+  constructor(articleNumber) {
+    this.articleNumber = articleNumber;
+  }
+
+  static printPublisher() {
+    console.log(Article.publisher);
+  }
+}
+
+const article1 = new Article(1);
+const article2 = new Article(2);
+console.log(Article.publisher);
+Article.printPublisher();
+
+
+// 5. inheritance
+// a way for one cllass to extend another class.
+class Shape {
+  constructor(width, height, color) {
+    this.width = width;
+    this.height = height;
+    this.color = color;
+  }
+
+  draw() {
+    console.log(`drawing ${this.color} color of`);
+  }
+
+  getArea() {
+    return this.width * this.height;
+  }
+}
+
+// Rectangle클래스 만들 떄 이렇게 쓰믄 자동으로 위의 클래스가 포함됨
+class Rectangle extends Shape {}
+// 삼각형은 넓이 구하는 공식 다르니 그 정보를 덮어씌워본다 : overriding
+// draw함구는 부모꺼랑 같이 불러보자
+class Triangle extends Shape {
+  draw() {
+    super.draw();
+    console.log('🔺');
+  }
+  getArea() {
+    return (this.width * this.height) / 2;
+  }
+}
+
+// 윗말이 맞는지 보자. Rectangle불러본다
+const rectangle = new Rectangle(20, 20, 'blue');
+rectangle.draw();
+console.log(rectangle.getArea());
+
+const triangle = new Triangle(20, 20, 'red');
+triangle.draw();
+
+
+// 6.class checking: instanceOf(앞의 것은 뒤의 것의 인스턴스인가요?)
+console.log(rectangle instanceof Rectangle); // T
+console.log(triangle instanceof Rectangle); // F
+console.log(triangle instanceof Triangle); // T
+console.log(triangle instanceof Shape); // T
+console.log(triangle instanceof Object); // T
+
+---------------------------------7-------------------------------
+
+//objects
+// one of the js's data types.
+// a collection of related data and/or functionality.
+// nearly all objects in js are intances of object
+// obj = { key : value };
+
+// 1.literals and properties
+// obj만드는 방뻡2
+// const obj1 = {}; // 'object 정확한literal데이터 그 자체' syntax
+// const obj2 = new Object(); // 'object constructor생성자' syntax
+
+// function print(name, age) {
+//   console.log(person.name);
+//   console.log(person.age);
+// }
+
+const ellie = {name: 'ellie', age: 4};
+// print(ellie);
+
+// with js magic (dynamically typed language)
+// can add properties later
+// ellie.hasJob = true;
+// console.log(ellie.hasJob);
+
+// can delete properties later
+// delete ellie.hasjob;
+
+
+// 2. conputed properties
+// key should be always string
+//프로퍼티 접근 방법
+// console.log(ellie.name); // 문법을 통해 접근-> 원래는 이게 맞다. 필요 키를 알 때
+// console.log(ellie['name']); // 변수를 스트링 형태로 접근 ->정확히 어떤 키 필요한지 모를 때
+// ellie['hasJob'] = true;
+// console.log(ellie.hasJob);
+
+// 예. 동적으로 키에 관련한 밸류 받아와야 할 때 쓸 수 있다....아 먼말이냐
+// function printValue(obj, key) {
+//   console.log(obj[key]);
+// }
+
+// printValue(ellie, 'name');
+// printValue(ellie, 'age');
+
+
+
+
+// 3. property value shorthand
+// 새로 만들 함수의 키와 밸류가 동일하면 생략 가능
+const person1 = { name: 'bob', age: 2 };
+const person2 = { name: 'steve', age: 3 };
+const person3 = { name: 'dave', age: 4 };
+const person4 = new Person('ellie', 30);
+console.log(person4);
+
+
+
+// 4. constructor function
+function Person(name, age) { // 순수하게 obj 만드는 함수는 대문자로 시작
+  // this = {};
+  this.name = name;
+  this.age = age;
+  // return this;
+}
+
+
+// 5. in operator: property existence check (key in obj)
+console.log('name' in ellie); // 키가 있는지 없는지 확인
+console.log(ellie.name);
+
+// 6. for..in vs for..of
+// for (key in obj)
+console.clear();
+for (key in ellie) {
+  console.log(key);
+}
+
+// for (value of iterable)
+const array = [1, 2, 4, 5];
+for (value of array) {
+  console.log(value);
+}
+
+
+// 7. fun cloning
+// object.assign(dest, [obj1, obj2, obj3...])
+const user = { name: 'ellie', age: '20' };
+const user2 = user;
+user2.name = 'coder';
+console.log(user);
+
+// old way
+const user3 = {};
+for (key in user) {
+  user3[key] = user[key];
+}
+console.clear(); // 위 기록을 지운다는데 vs에선 안되는듯?
+console.log(user3);
+
+const user4 = Object.assign({}, user);
+console.log(user4);
+
+// another example
+const fruit1 = {color: 'red'};
+const fruit2 = { color: 'blue', size: 'big' };
+const mixed = Onject.assign({}, fruit1, fruit2);
+console.log(mixed.color); // 뒤에 나오는 애가 덮어서 fruit2의 색
+console.log(mixed.size);
+
+
+-----------------------8, 9-------------------------------------
+
+
+'use strict'
+// 플젝을 할 때 array를 안 쓴적 없다! 그만큼 많이 씀
+
+// array 첫번째 자료구조다
+
+// 1. reclaration
+const arr1 = new Array();
+const arr2 = [1, 2];
+
+// 2. index position
+const fruits = ['🍾', '🍷'];
+console.log(fruits);
+console.log(fruits.length);
+console.log(fruits[0]);
+console.log(fruits[1]);
+console.log(fruits[2]);
+
+
+
+// 3. looping over an array
+// print all fruits
+
+// a. for
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
+}
+
+// b. for of
+for (let fruit of fruits) { 
+  console.log(fruit);
+}
+
+// c. forEach
+fruits.forEach(function (fruit) {
+  console.log(fruit);
+});
+
+// c를 자세히 써보자
+fruits.forEach(function (fruit, index) {
+  console.log(fruit, index);
+});
+
+// d. forEach + arrow function
+fruits.forEach((fruit) => console.log(fruit));
+
+
+
+// 4. addition, deletion, copy
+// push: add an item to the end
+fruits.push('🍸', '🍺');
+console.log(fruits);
+
+// pop: remove an item from the end
+fruits.pop();
+console.log(fruits);
+
+// add an item to the beginning
+fruits.unshift('🍹', '🍺');
+console.log(fruits);
+
+// shift: remove an item from the beginning
+fruits.shift();
+console.log(fruits);
+
+// note!! (un)shift are slower than pop, push
+// 앞에서 데이터 넣고 빼려면 다른 데이터들을 뒤로/앞으로 옮겨야하기 때문
+// remove an item by index position
+fruits.push('🥩', '🍜', '🍢');
+console.log(fruits);
+
+// fruits.splice(1); -> 첫번째만 쓰면 이 번호 이상의 인덱스 다 지움. 즉 0번 한개만 나옴
+fruits.splice(1, 1);
+console.log(fruits);
+
+fruits.splice(1, 1, '🫕', '🍩'); // 1번 인덱스부터 1개 지우가 뒤의 것들 넣어
+console.log(fruits);
+
+// combine two arrays
+const fruits2 = ['🍕', '🍔'];
+const newFruits = fruits.concat(fruits2);
+console.log(newFruits);
+
+
+
+// 5. searching
+// find the index
+// indexOf: find the index
+// includes
+console.clear();
+console.log(fruits);
+console.log(fruits.indexOf('🍩')); // 인덱스 몇번에 있느냐
+console.log(fruits.indexOf('🐿️')); // 없는거 찾으면 -1나와
+console.log(fruits.includes('🍩')); // 포함하고 있냐?
+
+// lastIndexOf
+fruits.push('🍺');
+console.log(fruits);
+console.log(fruits.indexOf('🍺'));  //중복이면 첫번째 나오는 애꺼 나옴
+console.log(fruits.lastIndexOf('🍺'));
+
+
+
+// 6. js api들 어떻게 쓰는건지 읽고 써보라했는데 귀찮고 짜증이라 그냥 정의 읽기만 했다 
+
+
+---------------------------10----------------------------
+
+
+// json
+// js obj notation
+// 두가지만 확실히 알아보자 json <-> obj
+
+// 1. obj to json
+// stringfy(obj)
+let json = JSON.stringify(true);
+console.log(json); // true
+
+//배열을 json으로 변환
+json = JSON.stringify(['apple', 'banana']);
+console.log(json); // ["apple","banana"]
+
+
+const rabbit = {
+  name1: 'tori',
+  color: 'white',
+  size: null,
+  birthDate: new Date(),
+  jump: () => {
+    console.log(`${name1} can jump!`);
+  },
+}
+
+json = JSON.stringify(rabbit);
+console.log(json); // {"name1":"tori","color":"white","size":null,"birthDate":"2022-12-07T13:41:36.360Z"}
+
+json = JSON.stringify(rabbit, ["name1"]); 
+console.log(json); // {"name1":"tori"}
+
+json = JSON.stringify(rabbit, (key, value) => {
+  console.log(`key: ${key}, value: ${value}`);
+  return value;
+}); 
+console.log(json); // 모든 키와 밸류들 전달됨
+// 첫번째는 key: , value: [object Object]
+
+
+
+// 2. json to obj
+// parse(json)
+json = JSON.stringify(rabbit);
+console.log(json); // json자체가 어케 생겼는지 봐라
+
+// const obj = JSON.parse(json); // json을 obj로
+// console.log(obj); // 출력해본다
+// rabbit.jump(); //name1 is not defined
+// obj.jump(); // obj.jump is not a function
+// 위 이유: 스트링으로 만들어진 json으로부터 만들어지므로 함수는 시리얼라이즈 안되어 전달 안됨
+
+// console.log(rabbit.birthDate.getDate()); // 오늘 날짜
+// // rabbit오브제 안의 birthDate함수는 date함수라서 그 계열의 api쓸 수 있
+// console.log(obj.birthDate.getDate()); // 에러
+// // json으로부터 만든 obj의 birthDate출력하믄 에러남
+// // 이유: birthDate가 스트링이라서.json으로 만든 데이터 자체에 있는 string이 obj에 할당된 것
+
+// ------------위를 고친게 밑------------------
+
+// 그래서 위를 세밀하게 뭐 변환하고프믄 콜백 써
+// 위는 중복으로, 주석처리함, 새로 정의해야함
+const obj = JSON.parse(json, (key, value) => {
+  console.log(`key: ${key}, value: ${value}`);
+  return key === 'birthDate' ? new Date(value) : value;
+}); // 이러믄 모든 키와 밸류 나옴
+
+console.log(rabbit.birthDate.getDate()); 
+console.log(obj.birthDate.getDate()); // 위에서 안된거 됨
+
+
