@@ -1,0 +1,7 @@
+.alert-box {
+  display: none;
+  border-radius: 5px;
+  padding: 20px;
+  color: blueviolet;
+  background-color: azure;
+}
