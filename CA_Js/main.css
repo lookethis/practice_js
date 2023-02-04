@@ -1,3 +1,9 @@
+/* body */
+.dark {
+  background-color: black;
+  color: white;
+}
+
 /* .alert-box {
   background-color: skyblue;
   padding: 20px;
@@ -6,6 +12,7 @@
   display: none;
 } */
 
+/* list */
 .list-group {
   height: 0;
   transition: all 1s;
@@ -54,6 +61,6 @@
 
 .main-bg {
   padding: 300px 20px;
-  background: url(img/babybunny.png);
+  background: lightgray;
   color: white;
 }
