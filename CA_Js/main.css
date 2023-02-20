@@ -1,0 +1,109 @@
+/* :root {
+  /* scroll-behavior: auto; */
+
+/* body */
+.dark {
+  background-color: black;
+  color: white;
+}
+
+/* .alert-box {
+  background-color: skyblue;
+  padding: 20px;
+  color: aliceblue;
+  border-radius: 5px;
+  display: none;
+} */
+
+/* navbar */
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+}
+
+.navbar-brand {
+  font-size: 25px;
+}
+
+.scroll-bar {
+  margin: 10px 0 0 0;
+  height: 5px;
+  width: 100vw;
+  background-color: lightblue;
+  opacity: 0.5;
+}
+
+/* list */
+.list-group {
+  height: 0;
+  transition: all 1s;
+  overflow: hidden;
+}
+
+.list-modal {
+  height: 220px;
+  visibility: visible;
+  opacity: 1;
+  overflow: scroll;
+}
+
+.show {
+  display: block;
+}
+
+.black-bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 6;
+  padding: 30px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 1s;
+}
+
+.show-modal {
+  visibility: visible;
+  opacity: 1;
+}
+
+.white-bg {
+  background: white;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.showme {
+  display: block;
+}
+
+/* shirts on sale */
+
+.main-bg {
+  padding: 300px 20px;
+  background: lightgray;
+  color: white;
+}
+
+/* 캐러셀 */
+.slide-container {
+  width: 300vw;
+  /* 최종화면 */
+  /* 마진보다 부드럽다 */
+  /* transform: translateX(-100vw); */
+  transition: all 1s;
+}
+
+.slide-box {
+  width: 100vw;
+  float: left;
+}
+
+.slide-box img {
+  width: 100%;
+}
+
+/*  */
+/*  */
