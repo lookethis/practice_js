@@ -1,0 +1,53 @@
+// algorithm문제들 모아본다. 10개
+
+// 1. 369게임
+
+function solution() {
+  var answer = [];
+
+  for (var i = 1; i <= 30; i++) {
+    if ((i % 10) % 3 == 0 && i % 10 != 0) {
+      answer.push("짝!");
+    } else if (Math.floor((i / 10) % 3) == 0 && Math.floor(i / 10) != 0) {
+      answer.push("짝!");
+    } else {
+      answer.push(i);
+    }
+  }
+
+  return answer;
+}
+
+// 2. 소수의 합 구하기
+
+function solution() {
+  var sum = 0;
+
+  for (var i = 1; i <= 200; i++) {
+    // 1~200까지 셈
+    for (var j = 2; j <= i; j++) {
+      // 2~200까지 셈(소수 판별하려는 범위)
+      if (i % j == 0) {
+        // 소수는 자기자신으로만 나눠져야하므로
+        break;
+      }
+    }
+    if (j == i) {
+      sum += j; // j가 소수
+    }
+  }
+
+  return sum;
+}
+
+// 3. 숫자 자릿수 반환
+
+function getDigits(num) {
+  let newArr = []; // 답 넣을 배열 마련
+  while (num > 0) {
+    newArr.push(num % 10); // 1의자리 수 넣기
+    num = parseInt(num / 10); // 1의 자리수 넣었으니  num은 1의 자릿수 뺀 수들로 이뤄짐 1100->110
+  }
+  newArr.reverse(); // 뒤집
+  return newArr;
+}
