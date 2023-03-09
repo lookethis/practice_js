@@ -84,3 +84,19 @@ function solution(data) {
 
   return result.join("\n");
 }
+
+// 5. 구구단: 결과값이 큰 순대로 출력
+
+function solution() {
+  let dict = {};
+  let result = [];
+
+  for (let i = 2; i <= 9; i++)
+    for (let j = 1; j <= 9; j++) dict[i + ' * ' + j] = i * j;
+
+  dict = Object.entries(dict).sort((a, b) => a[1] - b[1]);
+
+  for (let [k, v] of dict) result.push(k + ' = ' + v);
+
+  return result.join('\n')
+}
